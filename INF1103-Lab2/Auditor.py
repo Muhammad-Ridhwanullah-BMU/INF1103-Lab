@@ -89,11 +89,21 @@ while quit == False:
                         print(msg)
 
         elif option == 3:
-            print("=============================")
-            print(f"Thank you for using the system!")
-            print("=============================")
-
-            quit = True
-
+                    print("=============================")
+                    print(f"Thank you for using the system!")
+                    print("=============================")
+        
+                    if len(errors) != 0 or len(crInv) != 0:
+                        print("Successful Transactions: ", len(crInv))
+                        for number, amount in enumerate(crInv, start=1):
+                            print(f"S/N{number}\nAmount: ${amount}\n")
+                        print("=============================")
+                        print("Unsuccessful Transactions: ", len(errInv))
+                        for number, (invalid_input, reason) in enumerate(zip(errInv, errors), start=1):
+                            print(f"S/N{number}\nInput: {invalid_input}\nReason: {reason}")
+                        print("=============================")
+        
+                    quit = True
+                    
     else:
         print("Sorry Invalid Option, Please Try Again...")
