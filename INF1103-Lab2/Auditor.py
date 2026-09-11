@@ -16,8 +16,6 @@ def mainMenu():
     print("3. Quit")
     print("=============================")
 
-
-
 while quit == False:
 
     mainMenu()
@@ -41,14 +39,14 @@ while quit == False:
                                 errors.append(msg)
                                 print(msg)
         
-                        elif add.isdigit() == False:
-                            msg = "Not a digit, operation cancelled !"
+                        elif add.startswith("-") and add[1:].isdigit():
+                            msg = "Negative numbers not accepted, operation cancelled !"
                             errInv.append(add)
                             errors.append(msg)
                             print(msg)
         
                         else:
-                            msg = "Negative numbers not accepted, operation cancelled !"
+                            msg = "Not a digit, operation cancelled !"
                             errInv.append(add)
                             errors.append(msg)
                             print(msg)
@@ -72,14 +70,14 @@ while quit == False:
                                 crInv.append(sub)
                                 print(f"Successfully removed {sub} from the inventory !\nInventory total: {inventory}")
         
-                        elif sub.isdigit() == False:
-                            msg = "Not a digit, operation cancelled !"
+                        elif sub.startswith("-") and sub[1:].isdigit():
+                            msg = "Negative numbers not accepted, operation cancelled !"
                             errInv.append(sub)
                             errors.append(msg)
                             print(msg)
         
                         else:
-                            msg = "Negative numbers not accepted, operation cancelled !"
+                            msg = "Not a digit, operation cancelled !"
                             errInv.append(sub)
                             errors.append(msg)
                             print(msg)
