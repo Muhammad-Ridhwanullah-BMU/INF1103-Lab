@@ -58,7 +58,35 @@ while quit == False:
                         print(msg)
 
         elif option == 2:
-            print()
+                    if inventory > 0:
+                        sub = input("Number of inventory to remove: ")
+                        if sub.isdigit() == True and int(sub) > 0:
+                            sub = int(sub)
+                            if sub > inventory:
+                                errInv.append(sub)
+                                errors.append("Not enough inventory to remove")
+                                print("Not enough inventory to remove, operation cancelled !")
+        
+                            else:
+                                inventory -= sub
+                                crInv.append(sub)
+                                print(f"Successfully removed {sub} from the inventory !\nInventory total: {inventory}")
+        
+                        elif sub.isdigit() == False:
+                            msg = "Not a digit, operation cancelled !"
+                            errInv.append(sub)
+                            errors.append(msg)
+                            print(msg)
+        
+                        else:
+                            msg = "Negative numbers not accepted, operation cancelled !"
+                            errInv.append(sub)
+                            errors.append(msg)
+                            print(msg)
+        
+                    else:
+                        msg = "Inventory empty, operation cancelled !"
+                        print(msg)
 
         elif option == 3:
             print("=============================")
