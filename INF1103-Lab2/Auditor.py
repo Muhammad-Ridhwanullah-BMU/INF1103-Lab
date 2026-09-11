@@ -94,6 +94,7 @@ while quit == False:
                     print("=============================")
         
                     if len(errors) != 0 or len(crInv) != 0:
+                        print("Total Inventory: ", inventory)
                         print("Successful Transactions: ", len(crInv))
                         for number, amount in enumerate(crInv, start=1):
                             print(f"S/N{number}\nAmount: ${amount}\n")
@@ -102,8 +103,13 @@ while quit == False:
                         for number, (invalid_input, reason) in enumerate(zip(errInv, errors), start=1):
                             print(f"S/N{number}\nInput: {invalid_input}\nReason: {reason}")
                         print("=============================")
+
+                    else:
+                         print("No changes made !")
         
                     quit = True
-                    
+        else:
+                print("Sorry Invalid Option, Please Try Again...")
+
     else:
         print("Sorry Invalid Option, Please Try Again...")
