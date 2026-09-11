@@ -95,13 +95,15 @@ while quit == False:
         
                     if len(errors) != 0 or len(crInv) != 0:
                         print("Total Inventory: ", inventory)
+                        
                         print("Successful Transactions: ", len(crInv))
-                        for number, amount in enumerate(crInv, start=1):
-                            print(f"S/N{number}\nAmount: ${amount}\n")
+                        for i in range(len(crInv)):
+                             print(f"S/N: {i+1}\nAmount: {crInv[i]}\n") 
                         print("=============================")
+
                         print("Unsuccessful Transactions: ", len(errInv))
-                        for number, (invalid_input, reason) in enumerate(zip(errInv, errors), start=1):
-                            print(f"S/N{number}\nInput: {invalid_input}\nReason: {reason}")
+                        for i in range(len(errInv)):
+                              print(f"S/N: {i+1}\nInput: {errInv[i]}\nReason: {errors[i]}")
                         print("=============================")
 
                     else:
