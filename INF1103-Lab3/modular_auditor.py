@@ -1,7 +1,7 @@
 inventory = 0
 option = 0
-errmsg = []
 errInv = []
+taxes = []
 crInv = []
 
 errors = []
@@ -12,16 +12,14 @@ deliveries_processed = 0
 
 def mainMenu():
     print("=============================")
-    print("Welcome to the Inventory Management System: ")
-    print("1. Add Inventory")
-    print("2. Remove Inventory")
-    print(f"Type{"quit"} to end program")
+    print("Welcome to the Inventory Management System")
+    print("- Add to Inventory -")
     print("=============================")
 
 def get_valid_input():
     global failed_attempts
-
-    value = input("Enter stock quantity: ")
+    value = input("Enter stock quantity (Type [quit] to end program): ")
+    print("=============================================================")
 
     if value.lower() == "quit":
         return "quit"
@@ -61,8 +59,10 @@ def calculate_tax(amount):
 
 def process_delivery(current_total, new_value):
     current_total += new_value
+    print("=============================")
     print("Delivery Processed !")
     print("Total Inventory: ", current_total)
+    print("=============================")
     return current_total
 
 def generate_report(deliveries_processed, failed_attempts):
@@ -72,10 +72,11 @@ def generate_report(deliveries_processed, failed_attempts):
 
     if len(crInv) != 0:
         print("Total Inventory: ", inventory)
-        print("Total Transactions processed: ", deliveries_processed)
+        print("Total Units Processed: ", deliveries_processed)
         print("Successful Transactions: ", len(crInv))
         for i in range(len(crInv)):
             print(f"S/N: {i+1}\nAmount: {crInv[i]}\n")
+            print(f"Taxes: ${taxes[i]}\n")
 
     if len(errors) != 0:
         print("=============================")
@@ -87,81 +88,36 @@ def generate_report(deliveries_processed, failed_attempts):
     if len(errors) == 0 and len(crInv) == 0:
         print("No changes made !")
          
-    
+
+mainMenu()
+
 while quit == False:
 
-    mainMenu()
-    option = input("Select an option: ")
+    if inventory < 500:
+        add = get_valid_input()
 
-    if option.isdigit() == True:
-        option = int(option)
-        if option == 1:
-            if inventory < 500:
-                add = get_valid_input()
+        if add == "quit":
+            generate_report(inventory,failed_attempts)
+            quit = True
 
-                if add == "quit":
-                    generate_report(inventory,failed_attempts)
-                    quit = True
-
-                elif add != None:
-                    if (inventory + add) <= 500:
-                        inventory = process_delivery(inventory,add)
-                        tax = calculate_tax(add)
-                        crInv.append(add)
-                        deliveries_processed += 1
-
-                    else:
-                        msg = ("Inventory Overflow, operation cancelled !")
-                        errInv.append(add)
-                        errors.append(msg)
-                        failed_attempts += 1
-                        print(msg)
+        elif add != None:
+            if (inventory + add) <= 500:
+                tax = calculate_tax(add)
+                taxes.append(tax)
+                inventory = process_delivery(inventory,add)
+                crInv.append(add)
+                deliveries_processed += 1
 
             else:
-                msg = ("Inventory full, operation cancelled !")
+                msg = ("Inventory Overflow, operation cancelled !")
+                errInv.append(add)
+                errors.append(msg)
+                failed_attempts += 1
                 print(msg)
 
-
-        elif option == 2:
-                    if inventory > 0:
-                        sub = input("Number of inventory to remove: ")
-                        if sub.isdigit() == True and int(sub) > 0:
-                            sub = int(sub)
-                            if sub > inventory:
-                                errInv.append(sub)
-                                errors.append("Not enough inventory to remove")
-                                print("Not enough inventory to remove, operation cancelled !")
-        
-                            else:
-                                inventory -= sub
-                                crInv.append(sub)
-                                print(f"Successfully removed {sub} from the inventory !\nInventory total: {inventory}")
-        
-                        elif sub.startswith("-") and sub[1:].isdigit():
-                            msg = "Negative numbers not accepted, operation cancelled !"
-                            errInv.append(sub)
-                            errors.append(msg)
-                            print(msg)
-        
-                        else:
-                            msg = "Not a digit, operation cancelled !"
-                            errInv.append(sub)
-                            errors.append(msg)
-                            failed_attempts += 1
-                            print(msg)
-        
-                    else:
-                        msg = "Inventory empty, operation cancelled !"
-                        print(msg)
-
-        else:
-            if "quit" in option.lower():
-                quit = True
-            else:
-                print("Sorry Invalid Option, Please Try Again...")
-
     else:
-        print("Sorry Invalid Option, Please Try Again...")
+        msg = ("Inventory full, operation cancelled !")
+        print(msg)
 
 
 
