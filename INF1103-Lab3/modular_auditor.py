@@ -96,36 +96,31 @@ while quit == False:
     if option.isdigit() == True:
         option = int(option)
         if option == 1:
-                    if inventory < 500:
-                        add = input("Number of inventory to add: ")
-                        if add.isdigit() == True and int(add) > 0:
-                            add = int(add)
-                            if (inventory + add) <= 500:
-                                inventory += add
-                                crInv.append(add)
-                                print(f"SUccessfully added {add} to the inventory !\nInventory total: {inventory}")     
-        
-                            else:
-                                msg = "Inventory Overflow, operation cancelled !"
-                                errInv.append(add)
-                                errors.append(msg)
-                                print(msg)
-        
-                        elif add.startswith("-") and add[1:].isdigit():
-                            msg = "Negative numbers not accepted, operation cancelled !"
-                            errInv.append(add)
-                            errors.append(msg)
-                            print(msg)
-        
-                        else:
-                            msg = "Not a digit, operation cancelled !"
-                            errInv.append(add)
-                            errors.append(msg)
-                            print(msg)
-        
+            if inventory < 500:
+                add = get_valid_input()
+
+                if add == "quit":
+                    generate_report(inventory,failed_attempts)
+                    quit = True
+
+                elif add != None:
+                    if (inventory + add) <= 500:
+                        inventory = process_delivery(inventory,add)
+                        tax = calculate_tax(add)
+                        crInv.append(add)
+                        deliveries_processed += 1
+
                     else:
-                        msg = "Inventory full, operation cancelled !"
+                        msg = ("Inventory Overflow, operation cancelled !")
+                        errInv.append(add)
+                        errors.append(msg)
+                        failed_attempts += 1
                         print(msg)
+
+            else:
+                msg = ("Inventory full, operation cancelled !")
+                print(msg)
+
 
         elif option == 2:
                     if inventory > 0:
