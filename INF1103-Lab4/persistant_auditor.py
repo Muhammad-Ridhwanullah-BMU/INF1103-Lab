@@ -7,7 +7,7 @@ taxes = []
 crInv = []
 errors = []
 msg = ""
-filePath = r"C:\INF1103-Labs\INF1103-Lab4\Orders.txt"
+filePath = r"C:\INF1103-Labs\INF1103-Lab4\Inventory.txt"
 failed_attempts = 0
 deliveries_processed = 0
 
