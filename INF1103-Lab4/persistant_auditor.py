@@ -126,6 +126,12 @@ load_inventory()
 
 while quit == False:
 
+    product = input("Enter a product name: ")
+    if product == "quit":
+        generate_report(inventory,failed_attempts)
+        quit = True
+        break
+
     if inventory < 500:
         add = get_valid_input()
 
@@ -140,6 +146,8 @@ while quit == False:
                 inventory = process_delivery(inventory,add)
                 crInv.append(add)
                 deliveries_processed += 1
+                inventoryList.append((str(1000 + len(inventoryList)), product, add))
+                save_inventory(inventoryList[-1])
 
             else:
                 msg = ("Inventory Overflow, operation cancelled !")
@@ -151,6 +159,7 @@ while quit == False:
     else:
         msg = ("Inventory full, operation cancelled !")
         print(msg)
+
 
 
 
