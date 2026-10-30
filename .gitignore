@@ -11,3 +11,5 @@ __pycache__/
 # IDEs and Tools
 .vscode/
 .postman/
+.dockerignore/
+Dockerfile/
