@@ -1,0 +1,13 @@
+# Logs
+*.log
+logs/
+Logs/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs and Tools
+.vscode/
+.postman/
