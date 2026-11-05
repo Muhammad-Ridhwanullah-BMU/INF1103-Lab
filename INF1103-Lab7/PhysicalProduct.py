@@ -31,3 +31,8 @@ class PhysicalProduct(Product, CanBeShipped):
 
     def get_fulfilment_info(self):
         return "This product is delivered through physical courier shipping."
+
+    def calculate_shipping_cost(self):
+        cost = 0.82 if self.__weight <= 0.5 else 2.00 if self.__weight <= 2 else 5.00
+        print(f"The cost of shipping will be ${cost:.2f}")
+        return cost
