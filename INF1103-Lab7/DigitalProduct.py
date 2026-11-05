@@ -19,3 +19,14 @@ class DigitalProduct(Product):
         data["type"] = "digital"
         data["download_size"] = self.__download_size
         return data
+
+    def display_information(self):
+        super().display_information()
+        print(f"Download size: {self.__download_size:.2f}MB")
+
+    def display_summary(self):
+        super().display_summary(end="")
+        print(f" | Download Size: {self.__download_size:.2f} MB")
+
+    def get_fulfilment_info(self):
+        return "This product is delivered digitally."
