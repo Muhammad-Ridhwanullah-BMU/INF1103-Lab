@@ -20,3 +20,14 @@ class PhysicalProduct(Product, CanBeShipped):
         data["type"] = "physical"
         data["weight"] = self.__weight
         return data
+
+    def display_information(self):
+        super().display_information()
+        print(f"Weight: {self.__weight:.2f}KG")
+
+    def display_summary(self):
+        super().display_summary(end="")
+        print(f" | Weight: {self.__weight:.2f} KG")
+
+    def get_fulfilment_info(self):
+        return "This product is delivered through physical courier shipping."
