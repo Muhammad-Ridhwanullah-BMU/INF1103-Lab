@@ -1,0 +1,18 @@
+[
+    {
+        "id": "P001",
+        "name": "Heart",
+        "price": 400000.0,
+        "stock": 5,
+        "type": "physical",
+        "weight": 0.5
+    },
+    {
+        "id": "P002",
+        "name": "MS Office Product Key",
+        "price": 30.0,
+        "stock": 1000,
+        "type": "digital",
+        "download_size": 20.0
+    }
+]
