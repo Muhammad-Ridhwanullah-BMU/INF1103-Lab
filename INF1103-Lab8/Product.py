@@ -3,18 +3,24 @@ from abc import ABC, abstractmethod
 from Supplier import Supplier
 class Product(ABC):
 
-    def __init__(self:Product, product_id:str, name:str, price:float, stock:int, supplier:Supplier):
+    def __init__(self, product_id:str, name:str, price:float, stock:int, supplier:Supplier):
+        
         if not isinstance(product_id, str) or not product_id.strip():
             raise ValueError("Product ID cannot be empty.")
+        
         if not isinstance(name, str) or not name.strip():
             raise ValueError("Product name cannot be empty.")
+        
         if (isinstance(price, bool) or not isinstance(price, (int, float))
                 or not math.isfinite(price)):
             raise ValueError("Price must be a valid number.")
+        
         if isinstance(stock, bool) or not isinstance(stock, int):
             raise ValueError("Stock must be a whole number.")
+        
         if price < 0 or stock < 0:
             raise ValueError("Price and stock cannot be negative.")
+        
         if not isinstance(supplier, Supplier):
             raise ValueError("Supplier is needed.")
         

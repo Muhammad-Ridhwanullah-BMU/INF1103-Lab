@@ -1,14 +1,19 @@
 import math
 from Product import Product
 from CanBeShipped import CanBeShipped
+from Supplier import Supplier
 class PhysicalProduct(Product, CanBeShipped):
-    def __init__(self, product_id, name, price, stock, supplier, weight):
+    def __init__(self, product_id:str, name:str, price:float, stock:int, supplier:Supplier, weight:float):
+        
         super().__init__(product_id, name, price, stock, supplier)
+        
         if (isinstance(weight, bool) or not isinstance(weight, (int, float))
             or not math.isfinite(weight)):
             raise ValueError("Weight must be a valid number.")
+        
         if weight < 0:
             raise ValueError("Weight cannot be negative.")
+        
         self.__weight = float(weight)
 
     @property
