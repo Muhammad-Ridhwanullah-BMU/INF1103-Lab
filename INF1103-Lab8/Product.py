@@ -23,7 +23,7 @@ class Product(ABC):
         self.__name:str = name.strip()
         self.__price:float = float(price)
         self.__stock:int = stock
-        self.__suplier:Supplier = supplier
+        self.__supplier:Supplier = supplier
 
     @property
     def product_id(self):
@@ -58,8 +58,8 @@ class Product(ABC):
         print(f"Price: ${self.__price:.2f}")
         print(f"Stock: {self.__stock}")
 
-        print(f"Supplier Information: ")
-        self.__supplier.display_information()
+    def supplier_information(self):
+        self.__supplier.supplier_information()
 
     def update_stock(self, quantity):
         if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity < 0:

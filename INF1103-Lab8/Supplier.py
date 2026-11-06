@@ -21,7 +21,7 @@ class Supplier():
         self.__name = name
         self.__contact_email = contact_email
 
-    def display_information(self):
+    def supplier_information(self):
         print(
             f"Supplier ID: {self.__supplier_id} | "
             f"Supplier Name: {self.__name} | "
