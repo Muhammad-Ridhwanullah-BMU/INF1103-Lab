@@ -14,9 +14,6 @@ class Supplier():
         if not isinstance(contact_email, str) or not contact_email.strip():
             raise ValueError("Supplier email cannot be empty.")
         
-        if isinstance(contact_email, str):
-            raise ValueError("Supplier email cannot be empty.")
-        
         if not re.match(self.EMAIL_PATTERN, contact_email):
             raise ValueError(f"'{contact_email}' is not a valid email format.")
         
