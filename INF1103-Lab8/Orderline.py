@@ -9,3 +9,6 @@ class Orderline():
 
             self.__product:Product = product
             self.__quantity:int = quantity
+
+    def calculate_subtotal(self) -> float:
+        return self.__product.__price * self.__quantity
