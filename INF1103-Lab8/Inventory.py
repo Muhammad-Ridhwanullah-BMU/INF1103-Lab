@@ -5,10 +5,10 @@ class Inventory:
         self.__products: list[Product] = []
 
     @property    
-    def products(self):
+    def products(self) -> list[Product]:
         return self.__products.copy()
 
-    def display_all(self):
+    def display_all(self) -> None:
         print("Current Inventory")
         print("------------------------------------------------")
 
@@ -42,5 +42,5 @@ class Inventory:
         self.__products.remove(product)
         return True
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return [product.to_dictionary() for product in self.__products]
