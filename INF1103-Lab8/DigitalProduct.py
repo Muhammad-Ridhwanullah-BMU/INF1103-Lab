@@ -2,13 +2,17 @@ import math
 from Product import Product
 from Supplier import Supplier
 class DigitalProduct(Product):
-    def __init__(self:DigitalProduct, product_id:str, name:str, price:float, stock:int, supplier:Supplier, download_size: float):
+    def __init__(self, product_id:str, name:str, price:float, stock:int, supplier:Supplier, download_size: float):
+        
         super().__init__(product_id, name, price, stock, supplier)
+
         if (isinstance(download_size, bool) or not isinstance(download_size, (int, float))
             or not math.isfinite(download_size)):
             raise ValueError("Download size must be a valid number.")
+        
         if download_size < 0:
             raise ValueError("Download size cannot be negative.")
+        
         self.__download_size = float(download_size)
 
     @property
