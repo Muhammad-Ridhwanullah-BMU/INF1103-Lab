@@ -11,6 +11,14 @@ class Order():
         self.__order_id:str = order_id
         self.__order_lines:list[Orderline] = []
 
+    @property
+    def order_lines(self) -> list[Orderline]:
+        return self.__order_lines.copy()
+
+    @property
+    def order_id(self) -> str:
+        return self.__order_id
+
     def add_order_line(self, product:Product, quantity:int) -> None:
         order_line = Orderline(product, quantity)
         self.__order_lines.append(order_line)
