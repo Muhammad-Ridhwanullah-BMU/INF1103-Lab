@@ -32,24 +32,22 @@ class Product(ABC):
         self.__supplier:Supplier = supplier
 
     @property
-    def product_id(self):
+    def product_id(self) -> str:
         return self.__product_id
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
 
     @property
-    def stock(self):
+    def price(self) -> float:
+        return self.__price
+
+    @property
+    def stock(self) -> int:
         return self.__stock
 
-    @stock.setter
-    def stock(self, quantity):
-        if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity < 0:
-            raise ValueError("Stock must be a non-negative whole number.")
-        self.__stock = quantity
-
-    def display_summary(self, end="\n"):
+    def display_summary(self, end="\n") -> None:
         print(
             f"ID: {self.__product_id} | "
             f"Name: {self.__name} | "
@@ -58,25 +56,25 @@ class Product(ABC):
             end=end
         )
 
-    def display_information(self):
+    def display_information(self) -> None:
         print(f"ID: {self.__product_id}")
         print(f"Name: {self.__name}")
         print(f"Price: ${self.__price:.2f}")
         print(f"Stock: {self.__stock}")
 
-    def supplier_information(self):
+    def supplier_information(self) -> None:
         self.__supplier.supplier_information()
 
-    def update_stock(self, quantity):
+    def update_stock(self, quantity) -> None:
         if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity < 0:
             raise ValueError("Stock must be a non-negative whole number.")
         self.__stock = quantity
 
     @abstractmethod
-    def get_fulfilment_info(self):
+    def get_fulfilment_info(self) -> None:
         pass
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         return {
             "id": self.__product_id,
             "name": self.__name,
