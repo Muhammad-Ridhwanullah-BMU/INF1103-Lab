@@ -21,7 +21,19 @@ class Supplier():
         self.__name = name
         self.__contact_email = contact_email
 
-    def supplier_information(self):
+    @property
+    def supplier_id(self) -> str:
+        return self.__supplier_id
+
+    @property
+    def name(self) -> str:
+        return self.name
+
+    @property
+    def contact_email(self) -> str:
+        return self.__contact_email
+
+    def supplier_information(self) -> None:
         print(
             f"Supplier ID: {self.__supplier_id} | "
             f"Supplier Name: {self.__name} | "
