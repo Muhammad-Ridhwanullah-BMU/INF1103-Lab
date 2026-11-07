@@ -71,7 +71,7 @@ class Product(ABC):
         self.__stock = quantity
 
     @abstractmethod
-    def get_fulfilment_info(self) -> None:
+    def get_fulfilment_info(self) -> str:
         pass
 
     def to_dictionary(self) -> dict:
