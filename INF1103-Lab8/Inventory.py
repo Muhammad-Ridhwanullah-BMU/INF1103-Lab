@@ -20,7 +20,7 @@ class Inventory:
 
         print("------------------------------------------------")
 
-    def add_product(self, product:Product):
+    def add_product(self, product:Product) -> bool:
         if self.find_product(product.product_id) is not None:
             return False
 
@@ -34,7 +34,7 @@ class Inventory:
                 return product
         return None
 
-    def remove_product(self, product_id:str):
+    def remove_product(self, product_id:str) -> bool:
         product = self.find_product(product_id)
         if product is None:
             return False
