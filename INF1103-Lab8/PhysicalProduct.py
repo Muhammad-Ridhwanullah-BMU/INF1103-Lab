@@ -3,7 +3,7 @@ from Product import Product
 from CanBeShipped import CanBeShipped
 from Supplier import Supplier
 class PhysicalProduct(Product, CanBeShipped):
-    def __init__(self, product_id:str, name:str, price:float, stock:int, supplier:Supplier, weight:float):
+    def __init__(self, product_id:str, name:str, price:float, stock:int, supplier:Supplier, weight:float) -> None:
         
         super().__init__(product_id, name, price, stock, supplier)
         
@@ -20,7 +20,7 @@ class PhysicalProduct(Product, CanBeShipped):
     def weight(self) -> float:
         return self.__weight
 
-    def to_dictionary(self) -> dict:
+    def to_dictionary(self) -> list[dict]:
         data = super().to_dictionary()
         data["type"] = "physical"
         data["weight"] = self.__weight

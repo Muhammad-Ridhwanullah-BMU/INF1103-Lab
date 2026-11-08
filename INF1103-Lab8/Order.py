@@ -3,7 +3,7 @@ from Product import Product
 
 class Order():
 
-    def __init__(self, order_id:str):
+    def __init__(self, order_id:str) -> None:
 
         if not isinstance(order_id, str) or not order_id.strip():
             raise ValueError("Order ID cannot be empty.")

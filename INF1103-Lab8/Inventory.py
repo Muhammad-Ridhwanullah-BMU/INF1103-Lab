@@ -1,7 +1,7 @@
 from Product import Product
 class Inventory:
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.__products: list[Product] = []
 
     @property    
@@ -42,5 +42,5 @@ class Inventory:
         self.__products.remove(product)
         return True
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> list[dict]:
         return [product.to_dictionary() for product in self.__products]

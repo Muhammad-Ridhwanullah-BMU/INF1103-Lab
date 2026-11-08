@@ -3,7 +3,7 @@ class Supplier():
 
     EMAIL_PATTERN = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
     
-    def __init__(self,supplier_id:str, name:str, contact_email:str):
+    def __init__(self,supplier_id:str, name:str, contact_email:str) -> None:
         
         if not isinstance(supplier_id, str) or not supplier_id.strip():
             raise ValueError("Supplier ID cannot be empty.")

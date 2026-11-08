@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from Supplier import Supplier
 class Product(ABC):
 
-    def __init__(self, product_id:str, name:str, price:float, stock:int, supplier:Supplier):
+    def __init__(self, product_id:str, name:str, price:float, stock:int, supplier:Supplier) -> None:
         
         if not isinstance(product_id, str) or not product_id.strip():
             raise ValueError("Product ID cannot be empty.")
@@ -65,7 +65,7 @@ class Product(ABC):
     def supplier_information(self) -> None:
         self.__supplier.supplier_information()
 
-    def update_stock(self, quantity) -> None:
+    def update_stock(self, quantity:int) -> None:
         if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity < 0:
             raise ValueError("Stock must be a non-negative whole number.")
         self.__stock = quantity
@@ -74,7 +74,7 @@ class Product(ABC):
     def get_fulfilment_info(self) -> str:
         pass
 
-    def to_dictionary(self) -> dict:
+    def to_dictionary(self) -> list[dict]:
         return {
             "id": self.__product_id,
             "name": self.__name,

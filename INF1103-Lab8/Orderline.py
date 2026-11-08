@@ -1,7 +1,7 @@
 from Product import Product
 class Orderline():
 
-    def __init__(self, product:Product, quantity:int):
+    def __init__(self, product:Product, quantity:int) -> None:
             if not isinstance(product, Product):
                 raise ValueError("Product is needed.")
             if isinstance(quantity, bool) or not isinstance(quantity, int):

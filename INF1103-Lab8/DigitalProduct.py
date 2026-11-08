@@ -2,7 +2,7 @@ import math
 from Product import Product
 from Supplier import Supplier
 class DigitalProduct(Product):
-    def __init__(self, product_id:str, name:str, price:float, stock:int, supplier:Supplier, download_size: float):
+    def __init__(self, product_id:str, name:str, price:float, stock:int, supplier:Supplier, download_size: float) -> None:
         
         super().__init__(product_id, name, price, stock, supplier)
 
@@ -19,7 +19,7 @@ class DigitalProduct(Product):
     def download_size(self) -> float:
         return self.__download_size
 
-    def to_dictionary(self) -> dict:
+    def to_dictionary(self) -> list[dict]:
         data = super().to_dictionary()
         data["type"] = "digital"
         data["download_size"] = self.__download_size
