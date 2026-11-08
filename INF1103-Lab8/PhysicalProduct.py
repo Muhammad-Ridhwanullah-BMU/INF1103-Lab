@@ -20,7 +20,7 @@ class PhysicalProduct(Product, CanBeShipped):
     def weight(self) -> float:
         return self.__weight
 
-    def to_dictionary(self) -> list[dict]:
+    def to_dictionary(self) -> dict:
         data = super().to_dictionary()
         data["type"] = "physical"
         data["weight"] = self.__weight
@@ -32,11 +32,12 @@ class PhysicalProduct(Product, CanBeShipped):
         print("Supplier Information: ")
         super().supplier_information()
 
-    def display_summary(self) -> None:
+    def display_summary(self, end="\n") -> None:
         super().display_summary(end="")
         print(f" | Weight: {self.__weight:.2f} KG")
         print("Supplier Information: ")
         super().supplier_information()
+        print(end=end)
 
     def get_fulfilment_info(self) -> str:
         return "This product is delivered through physical courier shipping."

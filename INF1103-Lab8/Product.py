@@ -47,7 +47,7 @@ class Product(ABC):
     def stock(self) -> int:
         return self.__stock
 
-    def display_summary(self, end="\n") -> None:
+    def display_summary(self, end="") -> None:
         print(
             f"ID: {self.__product_id} | "
             f"Name: {self.__name} | "
@@ -74,7 +74,7 @@ class Product(ABC):
     def get_fulfilment_info(self) -> str:
         pass
 
-    def to_dictionary(self) -> list[dict]:
+    def to_dictionary(self) -> dict:
         return {
             "id": self.__product_id,
             "name": self.__name,
