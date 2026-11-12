@@ -34,10 +34,7 @@ class DigitalProduct(Product):
 
     def display_summary(self, end="\n") -> None:
         super().display_summary(end="")
-        print(f" | Download Size: {self.__download_size:.2f} MB")
-        print("Supplier Information: ")
-        super().supplier_information()
-        print(end=end)
+        print(f" | Download Size: {self.__download_size:.2f} MB", end=end)
 
     def get_fulfilment_info(self) -> str:
         return "This product is delivered digitally."
