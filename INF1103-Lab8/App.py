@@ -3,8 +3,9 @@ from DigitalProduct import DigitalProduct
 from PhysicalProduct import PhysicalProduct
 from CanBeShipped import CanBeShipped
 from Inventory import Inventory
+from Supplier import Supplier
 
-def main_menu():
+def main_menu() -> None:
     print("----------- MENU -----------")
     print("1. Display All Products")
     print("2. Add Product")
@@ -14,59 +15,59 @@ def main_menu():
     print("6. Exit")
     print("----------------------------")
 
-def add_product(inventory):
-    print("Add New Product")
+def ask_supplier(inventory: Inventory) -> Supplier:
+    """Create Supplier separately, or reuse an existing Supplier object."""
+    supplier_id = input("Supplier ID: ").strip()
+    if not supplier_id:
+        raise ValueError("Supplier ID cannot be empty.")
 
+    for product in inventory.products:
+        supplier = product.supplier
+        if supplier.supplier_id.casefold() == supplier_id.casefold():
+            print("Reusing existing Supplier:")
+            supplier.display_information()
+            return supplier
+
+    name = input("Supplier Name: ").strip()
+    email = input("Supplier Contact Email: ").strip()
+    return Supplier(supplier_id, name, email)
+
+def add_product(inventory: Inventory) -> None:
+    print("Add New Product")
     print("1. Physical Product")
     print("2. Digital Product")
-    product_type = input("Product Type (1 or 2): ").strip()
-    if product_type not in ("1", "2"):
-        print("Invalid product type. Please choose 1 or 2.")
+    choice = input("Product Type (1 or 2): ").strip()
+    if choice not in ("1", "2"):
+        print("Invalid product type.")
         return
 
     product_id = input("Product ID: ").strip()
-    if not product_id:
-        print("Product ID cannot be empty.")
-        return
-
     if inventory.find_product(product_id) is not None:
         print("Product ID already exists.")
         return
 
-    product_name = input("Product Name: ").strip()
-    if not product_name:
-        print("Product name cannot be empty.")
-        return
-
+    name = input("Product Name: ").strip()
     try:
         price = float(input("Price: "))
         stock = int(input("Stock Quantity: "))
+        supplier = ask_supplier(inventory)  # Before constructing Product
 
-    except ValueError:
-        print("Price must be a non-negative number and stock a non-negative whole number.")
-        return
-
-    try:
-        if int(product_type) == 1:
-            weight = float(input("Weight: "))
-            product = PhysicalProduct(product_id, product_name, price, stock, weight)
+        if choice == "1":
+            weight = float(input("Weight (KG): "))
+            product = PhysicalProduct(product_id, name, price, stock, supplier, weight)
         else:
-            download_size = float(input("Download Size: "))
-            product = DigitalProduct(product_id, product_name, price, stock, download_size)
-
-    except ValueError:
-        if int(product_type) == 1:
-            print("Weight must be a non-negative number")
-        else:
-            print("Download size must be a non-negative number")
+            size = float(input("Download Size (MB): "))
+            product = DigitalProduct(product_id, name, price, stock, supplier, size)
+    except (ValueError, TypeError) as error:
+        print(f"Unable to add product: {error}")
         return
 
     if inventory.add_product(product):
-        print("Product added to inventory successfully!")
+        print("Product added successfully!")
     else:
         print("Product ID already exists.")
 
-def update_stock(inventory):
+def update_stock(inventory: Inventory) -> None:
     print("Update Stock")
     product_id = input("Enter Product ID: ").strip()
     product = inventory.find_product(product_id)
@@ -87,7 +88,7 @@ def update_stock(inventory):
 
     print("Stock updated successfully!")
 
-def search_product(inventory):
+def search_product(inventory: Inventory) -> None:
     print("Search Product")
     product_id = input("Enter Product ID: ").strip()
     product = inventory.find_product(product_id)
@@ -104,7 +105,7 @@ def search_product(inventory):
         print(f"Shipping cost: ${product.calculate_shipping_cost():.2f}")
     print("------------------------------------------------")
 
-def remove_product(inventory):
+def remove_product(inventory: Inventory) -> None:
     print("Search Product")
     product_id = input("Enter Product ID: ").strip()
     if inventory.remove_product(product_id):
@@ -114,13 +115,18 @@ def remove_product(inventory):
 
 
 
-def main():
+def main() -> None:
     print("========================================")
     print("INVENTORY MANAGEMENT SYSTEM")
     print("========================================")
 
     # FileHandler reconstructs Inventory and Product objects from JSON.
-    inventory = load_inventory()
+    try:
+        inventory = load_inventory()
+    except (OSError, UnicodeError, ValueError) as error:
+        print(f"Inventory could not be loaded: {error}")
+        print("No changes have been saved. Fix or migrate inventory.json before running again.")
+        return
 
     while True:
         main_menu()
