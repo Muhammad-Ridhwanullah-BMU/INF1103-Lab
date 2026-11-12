@@ -8,7 +8,7 @@ class Order():
         if not isinstance(order_id, str) or not order_id.strip():
             raise ValueError("Order ID cannot be empty.")
 
-        self.__order_id:str = order_id
+        self.__order_id:str = order_id.strip()
         self.__order_lines:list[OrderLine] = []
 
     @property
@@ -30,3 +30,11 @@ class Order():
             total += orderlines.calculate_subtotal()
 
         return total
+
+    def display_order_lines(self) -> None:
+        print(f"Order {self.__order_id}")
+        if not self.__order_lines:
+            print("No order lines.")
+        else:
+            for order_line in self.__order_lines:
+                order_line.display_information()
