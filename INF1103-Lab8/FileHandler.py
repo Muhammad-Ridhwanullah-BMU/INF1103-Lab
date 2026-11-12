@@ -69,7 +69,7 @@ def load_inventory() -> Inventory:
                     raise ValueError("Physical product cannot have download_size.")
                 product = PhysicalProduct(
                     data["id"], data["name"], data["price"],
-                    data["stock"], data["weight"]
+                    data["stock"], supplier, data["weight"]
                 )
 
             elif product_type == "digital":
@@ -77,14 +77,14 @@ def load_inventory() -> Inventory:
                     raise ValueError("Digital product cannot have weight.")
                 product = DigitalProduct(
                     data["id"], data["name"], data["price"],
-                    data["stock"], data["download_size"]
+                    data["stock"], supplier, data["download_size"]
                 )
 
             else:
                 raise ValueError(f"Unknown product type: {product_type}")
 
             if not inventory.add_product(product):
-                print(f"Skipped duplicate product ID: {product.super().get_product_id()}")
+                print(f"Skipped duplicate product ID: {product.product_id}")
         except (KeyError, TypeError, ValueError, AttributeError):
             print("Skipped an invalid product in the inventory file.")
     return inventory
