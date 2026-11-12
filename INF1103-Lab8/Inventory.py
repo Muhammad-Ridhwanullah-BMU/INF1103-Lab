@@ -20,6 +20,10 @@ class Inventory:
 
         print("------------------------------------------------")
 
+    def display_all_products(self) -> None:
+        for product in self.__products:
+            product.display_information()
+
     def add_product(self, product:Product) -> bool:
         if self.find_product(product.product_id) is not None:
             return False
