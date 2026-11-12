@@ -19,7 +19,7 @@ class DigitalProduct(Product):
     def download_size(self) -> float:
         return self.__download_size
 
-    def to_dictionary(self) -> list[dict]:
+    def to_dictionary(self) -> dict:
         data = super().to_dictionary()
         data["type"] = "digital"
         data["download_size"] = self.__download_size
