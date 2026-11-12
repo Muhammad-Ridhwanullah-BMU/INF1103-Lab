@@ -4,8 +4,8 @@ class OrderLine():
     def __init__(self, product:Product, quantity:int) -> None:
             if not isinstance(product, Product):
                 raise ValueError("Product is needed.")
-            if isinstance(quantity, bool) or not isinstance(quantity, int):
-                raise ValueError("Quantity must be a whole number.")
+            if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0:
+                raise ValueError("Quantity must be a positive whole number.")
 
             self.__product:Product = product
             self.__quantity:int = quantity
@@ -27,3 +27,4 @@ class OrderLine():
             f"Quantity: {self.__quantity} | "
             f"Subtotal: ${self.calculate_subtotal():.2f}"
         )
+        
