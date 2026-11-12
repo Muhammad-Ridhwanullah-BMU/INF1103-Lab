@@ -17,9 +17,9 @@ class Supplier():
         if not re.match(self.EMAIL_PATTERN, contact_email):
             raise ValueError(f"'{contact_email}' is not a valid email format.")
         
-        self.__supplier_id = supplier_id
-        self.__name = name
-        self.__contact_email = contact_email
+        self.__supplier_id = supplier_id.strip()
+        self.__name = name.strip()
+        self.__contact_email = contact_email.strip()
 
     @property
     def supplier_id(self) -> str:
@@ -34,6 +34,9 @@ class Supplier():
         return self.__contact_email
 
     def supplier_information(self) -> None:
+        self.display_information()
+
+    def display_information(self) -> None:
         print(
             f"Supplier ID: {self.__supplier_id} | "
             f"Supplier Name: {self.__name} | "
