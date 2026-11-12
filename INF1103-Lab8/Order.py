@@ -1,4 +1,4 @@
-from Orderline import Orderline
+from OrderLine import OrderLine
 from Product import Product
 
 class Order():
@@ -9,10 +9,10 @@ class Order():
             raise ValueError("Order ID cannot be empty.")
 
         self.__order_id:str = order_id
-        self.__order_lines:list[Orderline] = []
+        self.__order_lines:list[OrderLine] = []
 
     @property
-    def order_lines(self) -> list[Orderline]:
+    def order_lines(self) -> list[OrderLine]:
         return self.__order_lines.copy()
 
     @property
@@ -20,7 +20,7 @@ class Order():
         return self.__order_id
 
     def add_order_line(self, product:Product, quantity:int) -> None:
-        order_line = Orderline(product, quantity)
+        order_line = OrderLine(product, quantity)
         self.__order_lines.append(order_line)
 
     def calculate_total(self) -> float:
