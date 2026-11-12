@@ -27,7 +27,7 @@ class Supplier():
 
     @property
     def name(self) -> str:
-        return self.name
+        return self.__name
 
     @property
     def contact_email(self) -> str:
