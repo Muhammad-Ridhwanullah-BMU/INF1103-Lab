@@ -42,3 +42,10 @@ class Supplier():
             f"Supplier Name: {self.__name} | "
             f"Contact Email: {self.__contact_email}"
         )
+
+    def to_dictionary(self) -> dict:
+        return {
+        "supplier_id": self.__supplier_id,
+        "name": self.__name,
+        "contact_email": self.__contact_email
+        }

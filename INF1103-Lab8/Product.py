@@ -47,6 +47,10 @@ class Product(ABC):
     def stock(self) -> int:
         return self.__stock
 
+    @property
+    def supplier(self) -> Supplier:
+        return self.__supplier
+
     def display_summary(self, end="") -> None:
         print(
             f"ID: {self.__product_id} | "
@@ -80,4 +84,5 @@ class Product(ABC):
             "name": self.__name,
             "price": self.__price,
             "stock": self.__stock,
+            "supplier": self.__supplier.to_dictionary()
         }
