@@ -3,11 +3,12 @@ import os
 from Inventory import Inventory
 from PhysicalProduct import PhysicalProduct
 from DigitalProduct import DigitalProduct
+from Supplier import Supplier
 
 FILE_NAME = "inventory.json"
 FILE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), FILE_NAME)
 
-def load_inventory():
+def load_inventory() -> Inventory:
 
     inventory = Inventory()
 
@@ -27,10 +28,30 @@ def load_inventory():
         print("Starting with empty inventory.")
         return inventory
 
-    for data in saved_products:
+    suppliers: dict[str, Supplier] = {}
+    for index, data in enumerate(saved_products, start=1):
         try:
             if not isinstance(data, dict):
                 raise ValueError("Product record must be a dictionary.")
+
+            supplier_data = data["supplier"]
+            if not isinstance(supplier_data, dict):
+                raise ValueError("supplier must be a dictionary.")
+
+            supplier_id = supplier_data["supplier_id"]
+            if not isinstance(supplier_id, str):
+                raise ValueError("Supplier ID must be text.")
+            key = supplier_id.strip().casefold()
+            supplier = suppliers.get(key)
+            if supplier is None:
+                supplier = Supplier(
+                    supplier_data["supplier_id"],
+                    supplier_data["name"],
+                    supplier_data["contact_email"],
+                )
+                suppliers[key] = supplier
+            elif supplier.to_dictionary() != supplier_data:
+                raise ValueError("Supplier ID has conflicting details.")
 
             product_type = data.get("type")
             if product_type is None:
@@ -68,7 +89,7 @@ def load_inventory():
             print("Skipped an invalid product in the inventory file.")
     return inventory
 
-def save_inventory(inventory, exit_save=False):
+def save_inventory(inventory: Inventory, exit_save: bool = False) -> bool:
     try:
         with open(FILE_PATH, "w", encoding="utf-8") as file:
             json.dump(inventory.to_dict(), file, indent=4, allow_nan=False)
