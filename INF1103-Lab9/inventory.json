@@ -1,0 +1,41 @@
+[
+    {
+        "id": "P001",
+        "name": "heart",
+        "price": 123333.0,
+        "stock": 1,
+        "supplier": {
+            "supplier_id": "S1",
+            "name": "HoyHup",
+            "contact_email": "HoyHup@gmail.com"
+        },
+        "type": "physical",
+        "weight": 11.0
+    },
+    {
+        "id": "P002",
+        "name": "afaef",
+        "price": 12312.0,
+        "stock": 123,
+        "supplier": {
+            "supplier_id": "S2",
+            "name": "Poool",
+            "contact_email": "pkfmap@gmail.com"
+        },
+        "type": "digital",
+        "download_size": 123123.0
+    },
+    {
+        "id": "P003",
+        "name": "wafa",
+        "price": 21212.0,
+        "stock": 14,
+        "supplier": {
+            "supplier_id": "S2",
+            "name": "Poool",
+            "contact_email": "pkfmap@gmail.com"
+        },
+        "type": "physical",
+        "weight": 89.0
+    }
+]
