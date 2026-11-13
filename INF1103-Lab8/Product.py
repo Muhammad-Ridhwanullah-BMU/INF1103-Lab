@@ -51,7 +51,7 @@ class Product(ABC):
     def supplier(self) -> Supplier:
         return self.__supplier
 
-    def display_summary(self, end="") -> None:
+    def display_summary(self, end="\n") -> None:
         print(
             f"ID: {self.__product_id} | "
             f"Name: {self.__name} | "
