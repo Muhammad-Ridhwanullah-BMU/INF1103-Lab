@@ -5,7 +5,7 @@ from NoDiscount import NoDiscount
 
 class Order():
 
-    def __init__(self, order_id:str, discount:DiscountStrategy) -> None:
+    def __init__(self, order_id:str, discount:DiscountStrategy  | None = None) -> None:
 
         if not isinstance(order_id, str) or not order_id.strip():
             raise ValueError("Order ID cannot be empty.")
@@ -25,7 +25,7 @@ class Order():
     def order_id(self) -> str:
         return self.__order_id
 
-    def set_discount(self, discount: DiscountStrategy  | None = None) -> None:
+    def set_discount(self, discount: DiscountStrategy) -> None:
         if not isinstance(discount, DiscountStrategy):
             raise TypeError("Discount must be a DiscountStrategy.")
 
