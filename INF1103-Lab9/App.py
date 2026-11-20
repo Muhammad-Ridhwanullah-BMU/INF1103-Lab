@@ -16,6 +16,20 @@ def main_menu() -> None:
     print("6. Exit")
     print("----------------------------")
 
+def get_positive_float(prompt: str) -> float:
+    while True:
+        try:
+            value = float(input(prompt))
+
+            if value <= 0:
+                print("Please enter a number greater than zero.")
+                continue
+
+            return value
+
+        except ValueError:
+            print("Please enter a valid number, e.g. 12.50")
+
 def ask_supplier(inventory: Inventory) -> Supplier:
     """Create Supplier separately, or reuse an existing Supplier object."""
     supplier_id = input("Supplier ID: ").strip()
@@ -49,7 +63,7 @@ def add_product(inventory: Inventory) -> None:
 
     name = input("Product Name: ").strip()
     try:
-        price = float(input("Price: "))
+        price = price = get_positive_float("Price: ")
         stock = int(input("Stock Quantity: "))
         supplier = ask_supplier(inventory)  # Before constructing Product
 
