@@ -25,7 +25,7 @@ class Order():
     def order_id(self) -> str:
         return self.__order_id
 
-    def set_discount(self, discount: DiscountStrategy) -> None:
+    def set_discount(self, discount: DiscountStrategy  | None = None) -> None:
         if not isinstance(discount, DiscountStrategy):
             raise TypeError("Discount must be a DiscountStrategy.")
 
