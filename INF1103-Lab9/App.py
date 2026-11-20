@@ -4,6 +4,7 @@ from PhysicalProduct import PhysicalProduct
 from CanBeShipped import CanBeShipped
 from Inventory import Inventory
 from Supplier import Supplier
+from ProductFactory import ProductFactory
 
 def main_menu() -> None:
     print("----------- MENU -----------")
@@ -52,12 +53,35 @@ def add_product(inventory: Inventory) -> None:
         stock = int(input("Stock Quantity: "))
         supplier = ask_supplier(inventory)  # Before constructing Product
 
+
         if choice == "1":
+            product_type = "physical"
             weight = float(input("Weight (KG): "))
-            product = PhysicalProduct(product_id, name, price, stock, supplier, weight)
+
+            product = ProductFactory.create(
+                product_type,
+                product_id,
+                name,
+                price,
+                stock,
+                supplier,
+                weight=weight
+            )
+
         else:
+            product_type = "digital"
             size = float(input("Download Size (MB): "))
-            product = DigitalProduct(product_id, name, price, stock, supplier, size)
+
+            product = ProductFactory.create(
+                product_type,
+                product_id,
+                name,
+                price,
+                stock,
+                supplier,
+                download_size=size
+            )
+
     except (ValueError, TypeError) as error:
         print(f"Unable to add product: {error}")
         return
