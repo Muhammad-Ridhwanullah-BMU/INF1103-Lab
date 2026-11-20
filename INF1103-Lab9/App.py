@@ -5,6 +5,7 @@ from CanBeShipped import CanBeShipped
 from Inventory import Inventory
 from Supplier import Supplier
 from ProductFactory import ProductFactory
+import math
 
 def main_menu() -> None:
     print("----------- MENU -----------")
@@ -21,7 +22,7 @@ def get_positive_float(prompt: str) -> float:
         try:
             value = float(input(prompt))
 
-            if value <= 0:
+            if not math.isfinite(value) or value <= 0:
                 print("Please enter a number greater than zero.")
                 continue
 
