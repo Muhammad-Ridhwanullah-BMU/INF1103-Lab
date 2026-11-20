@@ -18,8 +18,11 @@ class Product(ABC):
         if isinstance(stock, bool) or not isinstance(stock, int):
             raise ValueError("Stock must be a whole number.")
         
-        if price < 0 or stock < 0:
-            raise ValueError("Price and stock cannot be negative.")
+        if price <= 0:
+            raise ValueError("Price must be greater than zero.")
+
+        if stock < 0:
+            raise ValueError("Stock cannot be negative.")
         
         if not isinstance(supplier, Supplier):
             raise ValueError("Supplier is needed.")
